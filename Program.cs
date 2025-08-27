@@ -1,27 +1,70 @@
-﻿using System;
+﻿//Daniel Alves dos Santos Batista - RM:251376
+//Hernan Rodrigo - RM: 251169
+
+using System;
 using System.Globalization;
 
-namespace ExerciciosAula02
+namespace ExerciciosDataEINSS
 {
     public class Program
     {
+//Método seletor de funções 
         static void Main(string[] args)
         {
-            CalcularDescontoINSS();
+            FuncaoSeletoraDeMetodos();
         }
 
+        public static void FuncaoSeletoraDeMetodos()
+        {
+            Console.WriteLine("====================================================================");
+            Console.WriteLine("****** Exemplos - Aula 02 Descrição de Data e Calculo de INSS ******");
+            Console.WriteLine("====================================================================");
+            int opcaoEscolhida = 0;
+            do
+            {
+                Console.WriteLine("\n================================================");
+                Console.WriteLine("---Digite o número referente à opção desejada: ---");
+                Console.WriteLine("1 - Descrição de data por extenso");
+                Console.WriteLine("2 - Calculo de desconto do INSS");
+                Console.WriteLine("==================================================");
+                Console.WriteLine("-----Ou tecle qualquer outro número para sair-----");
+                Console.WriteLine("==================================================");
+                opcaoEscolhida = int.Parse(Console.ReadLine());
+                string mensagem = string.Empty;
+                switch (opcaoEscolhida)
+                {
+                    case 1:
+                        DetalharData();
+                        break;
+
+                    case 2:
+                        CalcularDescontoINSS();
+                        break;
+                    default:
+                        Console.WriteLine("Saindo do sistema....");
+                        break;
+                }
+        } while (opcaoEscolhida >= 1 || opcaoEscolhida >= 2);
+        }
+//Método que detalha a data por extenso
         public static void DetalharData()
         {
-            Console.WriteLine("Digite a data (ex: 26/08/2025):");
-            string entrada = Console.ReadLine();
+            DateTime data;
 
-            if (!DateTime.TryParse(entrada, out DateTime data))
+            while (true)
             {
+                Console.WriteLine("Digite a data (ex: 26/08/2025):");
+                string entrada = Console.ReadLine();
+
+                if (DateTime.TryParse(entrada, out data))
+                {
+                    break;
+                }
+
                 Console.WriteLine("Data inválida. Tente novamente.");
-                return;
             }
 
-            // Dia da semana e mês por extenso em PT-BR
+
             string diaSemana = data.ToString("dddd", new CultureInfo("pt-BR"));
             diaSemana = char.ToUpper(diaSemana[0]) + diaSemana.Substring(1);
 
@@ -31,19 +74,18 @@ namespace ExerciciosAula02
             Console.WriteLine($"Dia da semana: {diaSemana}");
             Console.WriteLine($"Mês: {mesExtenso}");
 
-            // Se for domingo → mostrar hora atual
+// Se for domingo mostra a hora atual
             if (data.DayOfWeek == DayOfWeek.Sunday)
             {
                 string horaAtual = DateTime.Now.ToString("HH:mm");
                 Console.WriteLine($"Hoje é domingo! Hora atual: {horaAtual}");
             }
         }
-
+//Método que calcula o desconto do INSS
         public static void CalcularDescontoINSS()
         {
             decimal salario;
 
-            // Entrada validada
             do
             {
                 Console.Write("Digite o salário: ");
@@ -70,7 +112,7 @@ namespace ExerciciosAula02
 
             decimal aliquota = 0m;
 
-            // Definindo a alíquota conforme a tabela
+// Definindo a alíquota conforme a tabela
             if (salario <= 1212.00m)
                 aliquota = 0.075m;
             else if (salario <= 2427.35m)
@@ -82,7 +124,7 @@ namespace ExerciciosAula02
             else
                 aliquota = 0.14m; // salário acima do teto, aplica limite (valor fixo sobre 7087,22 normalmente)
 
-            // Cálculo do desconto
+// Cálculo do desconto
             decimal desconto = salario * aliquota;
             decimal salarioLiquido = salario - desconto;
 

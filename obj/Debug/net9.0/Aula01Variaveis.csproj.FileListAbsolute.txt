@@ -26,3 +26,4 @@ D:\ETEC\2DS\DS\Aula01Variaveis\obj\Debug\net9.0\refint\Aula01Variaveis.dll
 D:\ETEC\2DS\DS\Aula01Variaveis\obj\Debug\net9.0\Aula01Variaveis.pdb
 D:\ETEC\2DS\DS\Aula01Variaveis\obj\Debug\net9.0\Aula01Variaveis.genruntimeconfig.cache
 D:\ETEC\2DS\DS\Aula01Variaveis\obj\Debug\net9.0\ref\Aula01Variaveis.dll
+D:\ETEC\2DS\DS\Aula01Variaveis\obj\Debug\net9.0\Aula01Variaveis.sourcelink.json
